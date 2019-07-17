@@ -1,0 +1,25 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: autoscale-go
+  namespace: default
+spec:
+  template:
+    metadata:
+      annotations:
+        # KPA
+        # Knative concurrency-based autoscaling (default).
+        # autoscaling.knative.dev/class: kpa.autoscaling.knative.dev
+        # autoscaling.knative.dev/metric: concurrency
+        
+        # Target 10 in-flight-requests per pod.
+        autoscaling.knative.dev/target: "10"
+
+        # HPA
+        # Standard Kubernetes CPU-based autoscaling.
+        # autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
+        # autoscaling.knative.dev/metric: cpu
+    spec:
+    spec:
+      containers:
+      - image: gcr.io/knative-samples/autoscale-go:0.1
