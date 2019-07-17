@@ -5,7 +5,7 @@ metadata:
   namespace: default # The namespace we're working in; also appears in the URL to access the app
 spec:
   traffic:
-    - revisionName: blue-green-demo-lcfrd ##### 取得したRevision名で更新
+    - revisionName: blue-green-demo-st2w8 ##### 取得したRevision名で更新
       percent: 100 # All traffic goes to this revision
     # - revisionName: blue-green-demo-m9548
     #   percent: 0 # 0% of traffic routed to the second revision

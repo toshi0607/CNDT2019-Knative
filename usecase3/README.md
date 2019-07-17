@@ -12,7 +12,7 @@ $ kubectl get configurations blue-green-demo -o=jsonpath='{.status.latestCreated
 # Route名は更新する
 $ kubectl apply --filename blue-green-demo-route.yaml
 
-$ curl -H "Host: helloworld-go.default.example.com" http://${IP_ADDRESS}
+$ curl -H "Host: blue-green-demo.default.example.com" http://${IP_ADDRESS}
 
 ### green
 # config.yamlのTARGETをgreenに更新
@@ -26,6 +26,8 @@ $ kubectl apply --filename blue-green-demo-route.yaml
 # 100%のblueと別にテスト用にアクセスできる
 # テスト用Routeの確認
 $ kubectl get route blue-green-demo --output jsonpath="{.status.traffic[*].url}"
+
+$ curl -H "Host: v2-blue-green-demo.default.example.com" http://${IP_ADDRESS}
 
 ### blue50、green50
 # Routeのトラフィックをどちらも50%に

@@ -17,4 +17,7 @@ $ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --names
 
 # Knarive Serving - Scaling Debuging
 # Knarive Serving - Revision HTTP Requests
+
+# 片付け
+$ kubectl delete --filename service.yaml
 ```
