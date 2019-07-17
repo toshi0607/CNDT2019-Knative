@@ -38,6 +38,9 @@ $ kubectl apply --filename blue-green-demo-route.yaml
 $ kubectl apply --filename blue-green-demo-route.yaml
 
 ＃ちょっと時間がかかる
-$ kubectl get route blue-green-demo --output jsonpath="{.status.traffic[*].url}"
+$ kubectl get route blue-green-demo --output yaml
 
+# 片付け
+$ kubectl delete --filename blue-green-demo-config.yaml
+$ kubectl delete --filename blue-green-demo-route.yaml
 ```
