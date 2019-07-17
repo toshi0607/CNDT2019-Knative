@@ -1,0 +1,60 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: build-image
+spec:
+  inputs:
+    resources:
+      - name: app
+        type: git
+    params:
+      - name: pathToDockerFile
+        description: The path to the dockerfile to build
+        default: /workspace/app/usecase5/Dockerfile
+      - name: pathToContext
+        description: The build context used by Kaniko (https://github.com/GoogleContainerTools/kaniko#kaniko-build-contexts)
+        default: /workspace/app/usecase5
+  outputs:
+    resources:
+      - name: builtImage
+        type: image
+  steps:
+    - name: build-and-push
+      image: gcr.io/kaniko-project/executor
+      command:
+        - /kaniko/executor
+      args:
+        - --dockerfile=${inputs.params.pathToDockerFile}
+        - --destination=${outputs.resources.builtImage.url}
+        - --context=${inputs.params.pathToContext}
+      volumeMounts:
+        - name: kaniko-secret
+          mountPath: /secret
+      env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /secret/kaniko-secret.json
+  volumes:
+    - name: kaniko-secret
+      secret:
+        secretName: kaniko-secret
+---
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: deploy-to-gke
+spec:
+  inputs:
+    resources:
+      - name: app
+        type: git
+    params:
+      - name: path
+        description: Path to the manifest to apply
+  steps:
+    - name: run-kubectl
+      image: lachlanevenson/k8s-kubectl
+      command: ['kubectl']
+      args:
+        - 'apply'
+        - '-f'
+        - '${inputs.params.path}'

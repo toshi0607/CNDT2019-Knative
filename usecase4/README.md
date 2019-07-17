@@ -33,6 +33,7 @@ $ kubectl get pods --selector serving.knative.dev/service=event-display
 $ kubectl logs --selector serving.knative.dev/service=event-display -c user-container
 
 # メッセージの確認
+# echo "" | base64 --decode
 # https://play.golang.org/p/VsXuFwHrB1f
 
 # 片付け

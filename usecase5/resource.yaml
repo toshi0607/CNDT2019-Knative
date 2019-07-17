@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: tekton-sample-resource-image
+spec:
+  type: image
+  params:
+    - name: url
+      value: gcr.io/${GCP_PROJECT}}/tekton-helloworld-go  # change!!!!!!
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: tekton-sample-resource-git
+spec:
+  type: git
+  params:
+    - name: revision
+      value: master
+    - name: url
+      value: https://github.com/toshi0607/CNDT2019-Knative.git

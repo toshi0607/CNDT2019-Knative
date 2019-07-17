@@ -1,0 +1,16 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineRun
+metadata:
+  name: pipeline-run
+spec:
+  pipelineRef:
+    name: sample-pipline
+  trigger:
+    type: manual
+  resources:
+    - name: app
+      resourceRef:
+        name: tekton-sample-resource-git
+    - name: image
+      resourceRef:
+        name: tekton-sample-resource-image

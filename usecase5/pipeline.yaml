@@ -1,0 +1,37 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: sample-pipline
+spec:
+  resources:
+    - name: app
+      type: git
+    - name: image
+      type: image
+  tasks:
+  - name: build-push-image
+    taskRef:
+      name: build-image
+    params:
+      - name: pathToDockerFile
+        value: /workspace/app/usecase5/Dockerfile
+      - name: pathToContext
+        value: /workspace/app/usecase5
+    resources:
+      inputs:
+      - name: app
+        resource: app
+      outputs:
+      - name: builtImage
+        resource: image
+  - name: deploy
+    runAfter: [build-push-image]
+    taskRef:
+      name: deploy-kubectl
+    params:
+      - name: path
+        value: /workspace/app/usecase5/service.yaml
+    resources:
+      inputs:
+      - name: app
+        resource: app
