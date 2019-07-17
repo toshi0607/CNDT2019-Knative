@@ -1,0 +1,16 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Configuration
+metadata:
+  name: blue-green-demo
+  namespace: default
+spec:
+  template:
+    metadata:
+      labels:
+        knative.dev/type: container
+    spec:
+      containers:
+        - image: gcr.io/knative-samples/helloworld-go
+          env:
+            - name: TARGET
+              value: "blue"

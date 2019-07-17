@@ -13,6 +13,8 @@ $ export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY --namespace istio-system -
 $ kubectl get route helloworld-go
 http://helloworld-go.default.example.com
 
+$ curl -H "Host: helloworld-go.default.example.com" http://${IP_ADDRESS}
+
 # kubectl get po,rs,deploy
 
 # 片付け
