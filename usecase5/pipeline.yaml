@@ -27,7 +27,7 @@ spec:
   - name: deploy
     runAfter: [build-push-image]
     taskRef:
-      name: deploy-kubectl
+      name: deploy-to-gke
     params:
       - name: path
         value: /workspace/app/usecase5/service.yaml
