@@ -23,6 +23,7 @@ namespace/default labeled
 $ gcloud pubsub topics create eventing-test-topic
 Created topic [projects/xxxxxxx/topics/eventing-test-topic].
 
+
 # demo
 $ kubectl apply --filename gcp-pubsub-source.yaml
 $ kubectl apply --filename trigger.yaml

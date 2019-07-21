@@ -13,7 +13,7 @@ $ hey -z 30s -c 50 \
 # 50 並行リクエスト / Podあたり10 = 5 pods
 
 # メトリクスをgrafanaで確認
-$ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespace knative-monitoring --selector=app=grafana  --output=jsonpath="{.items..metadata.name}") 8080
+$ kubectl port-forward --namespace knative-monitoring $(kubectl get pods --namespace knative-monitoring --selector=app=grafana  --output=jsonpath="{.items..metadata.name}") 3000
 
 # Knarive Serving - Scaling Debuging
 # Knarive Serving - Revision HTTP Requests

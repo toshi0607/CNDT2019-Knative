@@ -7,6 +7,7 @@ $ kubectl get svc istio-ingressgateway --namespace istio-system
 # minikubeなど外部LBがない場合は NodeIP や NodePort を利用
 $ export INGRESSGATEWAY=istio-ingressgateway
 $ export IP_ADDRESS=$(kubectl get svc $INGRESSGATEWAY --namespace istio-system --output 'jsonpath={.status.loadBalancer.ingress[0].ip}')
+$ echo $IP_ADDRESS
 
 # host URLを取得
 # カスタムドメインももちろん利用可能

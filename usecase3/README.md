@@ -33,6 +33,8 @@ $ curl -H "Host: v2-blue-green-demo.default.example.com" http://${IP_ADDRESS}
 # Routeのトラフィックをどちらも50%に
 $ kubectl apply --filename blue-green-demo-route.yaml
 
+$ curl -H "Host: blue-green-demo.default.example.com" http://${IP_ADDRESS}
+
 ### blue0、green100
 # blueを0にして tag: v1をつける
 $ kubectl apply --filename blue-green-demo-route.yaml
